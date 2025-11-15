@@ -2,8 +2,7 @@
 
 import Navigation from '@/components/navigation'
 import Hero from '@/components/hero'
-import Stats from '@/components/stats'
-import About from '@/components/about'
+import ProfileSection from '@/components/profile-section'
 import Footer from '@/components/footer'
 
 export default function Home() {
@@ -12,9 +11,8 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
-        <Stats />
+        <ProfileSection />
       </main>
-      <About />
       <Footer />
     </div>
   )

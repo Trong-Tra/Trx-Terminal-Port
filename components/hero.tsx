@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
@@ -15,16 +17,22 @@ export default function Hero() {
         </div>
 
         {/* Status indicator */}
-        <div className="text-green-400 text-2xl">status: [×] flat_lined()</div>
+        <div className="text-green-400 text-2xl">status: [×] flat_lined_by_bug()</div>
 
         {/* CTA Buttons */}
         <div className="flex gap-4 justify-center pt-6">
-          <button className="px-10 py-4 border border-white text-white hover:bg-white hover:text-black transition-all text-sm">
+          <Link 
+            href="/projects"
+            className="px-10 py-4 border border-white text-white hover:bg-white hover:text-black transition-all text-sm"
+          >
             view products
-          </button>
-          <button className="px-10 py-4 bg-white text-black hover:bg-gray-200 transition-all text-sm">
+          </Link>
+          <Link 
+            href="/contact"
+            className="px-10 py-4 bg-white text-black hover:bg-gray-200 transition-all text-sm"
+          >
             get in touch
-          </button>
+          </Link>
         </div>
       </div>
     </section>
