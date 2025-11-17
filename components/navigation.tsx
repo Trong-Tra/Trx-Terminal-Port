@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { } from 'react';
 
 export default function Navigation() {
-  const links = ['home', 'products', 'experience', 'skills', 'research', 'blog', 'contact'];
+  const links = ['home', 'products', 'research', 'experience', 'blog', 'contact'];
   const pathname = usePathname();
 
   const getHref = (link: string) => {
