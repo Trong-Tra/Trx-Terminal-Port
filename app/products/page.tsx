@@ -49,7 +49,7 @@ const products = [
 
 const stats = [
   { label: 'Hackathon Wins', value: '5' },
-  { label: 'Prize Money', value: '$12.000+' },
+  { label: 'Prize Money', value: '$12,000+' },
   { label: 'Years Active', value: '1+' },
   { label: 'Sleepless Days', value: '25' },
 ];
@@ -101,7 +101,7 @@ export default function ProductsPage() {
           </div>
 
           <div className="text-center text-gray-500 space-y-2 py-8">
-            <p>// building the next winning product...</p>
+            <p>// building the next impactful product...</p>
             <p className="text-xs">console.log("shipping in progress")</p>
           </div>
         </div>

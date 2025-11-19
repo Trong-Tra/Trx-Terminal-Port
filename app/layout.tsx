@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'tron.t.sol :: executing: build_web3()',
+  title: 'tron.t.sol',
   description: 'Blockchain and software developer focused on Rust and web3 development',
   keywords: ['Rust', 'Web3', 'Blockchain', 'Developer', 'Portfolio'],
   viewport: {
