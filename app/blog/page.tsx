@@ -2,16 +2,8 @@
 
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-
-const posts = [
-  {
-    title: 'Within my first year, I made over $12,000',
-    excerpt:
-      'Yes, this is a flex, but hear me out. In the past year, I have actively participated in various hackathons and competitions, which has not only been a great learning experience but also financially rewarding.',
-    date: 'November 19, 2025',
-    readTime: '7 min read',
-  },
-];
+import Link from 'next/link';
+import { blogPosts } from './blog-data';
 
 export default function BlogPage() {
   return (
@@ -30,24 +22,23 @@ export default function BlogPage() {
           </div>
 
           <div className="space-y-6 max-w-4xl mx-auto">
-            {posts.map((post, idx) => (
-              <article
-                key={idx}
-                className="border border-gray-700 bg-black/50 p-6 hover:border-green-400 transition-colors cursor-pointer group"
-              >
-                <h2 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors mb-3">
-                  {post.title}
-                </h2>
+            {blogPosts.map((post, idx) => (
+              <Link key={idx} href={`/blog/${post.id}`}>
+                <article className="border border-gray-700 bg-black/50 p-6 hover:border-green-400 transition-colors cursor-pointer group">
+                  <h2 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors mb-3">
+                    {post.title}
+                  </h2>
 
-                <p className="text-gray-400 leading-relaxed mb-4">
-                  {post.excerpt}
-                </p>
+                  <p className="text-gray-400 leading-relaxed mb-4">
+                    {post.excerpt}
+                  </p>
 
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <span>{post.date}</span>
-                  <span>{post.readTime}</span>
-                </div>
-              </article>
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <span>{post.date}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
 
