@@ -1,31 +1,64 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Typewriter from './typewriter';
+import TextType from './text-type';
+import ScrambledText from './scrambled-text';
+
+const typingText = [
+  "got bizz?, hook me up!",
+  "make your first publication!",
+  "bored ? there are always projects with me",
+  "new to research ? I know a guy that know a guy",
+  "explore oppotunities together",
+];
 
 export default function ProfileSection() {
   const [coffeeCount, setCoffeeCount] = useState('1337');
   const [isGlitching, setIsGlitching] = useState(false);
   const [terminalFlicker, setTerminalFlicker] = useState(false);
   const [glitchText, setGlitchText] = useState('');
-  
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
   // Popular port numbers for the glitch effect
-  const portNumbers = ['80', '443', '22', '21', '25', '53', '110', '143', '993', '995', '587', '465', '3306', '5432', '6379', '27017', '8080', '3000', '8000', '9000', '4200', '5000', '1337', '31337', '8888', '9999'];
-  
+  const portNumbers = ['80', '443', '22', '21', '25', '53', '110', '143', '993', '995', '587', '465', '3306', '5432', '6379', '27017', '8080', '3000', '8000', '9000', '4200', '5000', '1337', '31337', '8888', '9999', 'Error'];
+
   // Glitch characters for text scrambling
   const glitchChars = '!<>-_\\/[]{}—=+*^?#________';
 
   // Function to scramble text
   const scrambleText = (text: string) => {
-    return text.split('').map(() => 
+    return text.split('').map(() =>
       glitchChars[Math.floor(Math.random() * glitchChars.length)]
     ).join('');
   };
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
     const interval = setInterval(() => {
       setIsGlitching(true);
       setTerminalFlicker(true);
-      
+
       // Multiple rapid glitch cycles
       let glitchCycle = 0;
       const glitchInterval = setInterval(() => {
@@ -33,7 +66,7 @@ export default function ProfileSection() {
         const scrambled = scrambleText(randomPort);
         setGlitchText(scrambled);
         setCoffeeCount(randomPort);
-        
+
         glitchCycle++;
         if (glitchCycle > 8) { // More intensive glitching
           clearInterval(glitchInterval);
@@ -47,11 +80,11 @@ export default function ProfileSection() {
           }, 100);
         }
       }, 50); // Faster glitch cycles
-      
+
     }, 4000); // Glitch every 4 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isVisible]);
 
   const stats = [
     { number: '5', label: 'hackathons conquered' },
@@ -82,19 +115,19 @@ export default function ProfileSection() {
   };
 
   return (
-    <section className="py-20 px-6">
+    <section ref={sectionRef} className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Main Profile Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:items-stretch">
+
           {/* Left Column - Profile Picture */}
-          <div className="lg:col-span-3">
-            <div className="space-y-6">
+          <div className="lg:col-span-3 flex flex-col">
+            <div className="space-y-6 flex-1 flex flex-col">
               {/* Profile Picture */}
               <div className="aspect-square bg-transparent border border-gray-600/30 rounded-lg overflow-hidden">
-                <img 
-                  src="/nft.jpg" 
-                  alt="Profile NFT" 
+                <img
+                  src="/nft.jpg"
+                  alt="Profile NFT"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     // Fallback if image doesn't exist yet
@@ -113,13 +146,19 @@ export default function ProfileSection() {
               </div>
 
               {/* Status Block */}
-              <div className="bg-transparent border border-gray-600/30 p-4 rounded-lg">
+              <div className="bg-transparent border border-gray-600/30 p-4 rounded-lg flex-1 flex flex-col">
                 <h3 className="text-green-400 font-bold mb-4 text-sm">// status</h3>
-                <div className="space-y-1 text-xs text-gray-300">
+                <div className="space-y-1 text-xs text-gray-300 flex-1 overflow-hidden">
                   {statusLines.map((line, idx) => (
-                    <div key={idx} className="font-mono">
+                    <ScrambledText
+                      key={idx}
+                      radius={150}
+                      duration={0.4}
+                      scrambleChars="!<>-_\\/[]{}—=+*^?#________"
+                      className="font-mono whitespace-nowrap overflow-hidden text-ellipsis"
+                    >
                       {line}
-                    </div>
+                    </ScrambledText>
                   ))}
                 </div>
               </div>
@@ -127,14 +166,19 @@ export default function ProfileSection() {
           </div>
 
           {/* Right Column - Content */}
-          <div className="lg:col-span-9 space-y-8">
-            
+          <div className="lg:col-span-9 space-y-8 flex flex-col">
+
             {/* About Block */}
-            <div className="bg-transparent border border-gray-600/30 p-6 rounded-lg">
+            <div className="bg-transparent border border-gray-600/30 p-6 rounded-lg flex-1">
               <h2 className="text-green-400 font-bold mb-4 text-lg">// about.md</h2>
-              <p className="text-gray-300 leading-relaxed text-sm">
-                {aboutText}
-              </p>
+              <div className="text-gray-300 leading-relaxed text-sm min-h-[100px]">
+                <Typewriter
+                  text={aboutText}
+                  speed={20}
+                  cursor={true}
+                  start={isVisible}
+                />
+              </div>
             </div>
 
             {/* Stats Block */}
@@ -143,13 +187,12 @@ export default function ProfileSection() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {stats.map((stat, idx) => (
                   <div key={idx} className="text-center space-y-2">
-                    <div className={`text-2xl font-bold font-mono relative ${
-                      stat.isGlitch ? `
+                    <div className={`text-2xl font-bold font-mono relative ${stat.isGlitch ? `
                         ${isGlitching ? 'text-red-400' : 'text-green-400'} 
                         transition-all duration-75
                         ${isGlitching ? 'transform skew-x-2' : ''}
                       ` : 'text-white'
-                    }`}>
+                      }`}>
                       {stat.isGlitch && isGlitching && glitchText ? (
                         <>
                           <span className="absolute inset-0 text-red-500 opacity-60 animate-pulse">
@@ -180,23 +223,25 @@ export default function ProfileSection() {
             <div id="contact-section" className="bg-transparent border border-gray-600/30 p-6 rounded-lg">
               <h3 className="text-green-400 font-bold mb-4 text-lg">// contact.sh</h3>
               <div className="space-y-4">
-                <p className="text-gray-300 text-sm">
-                  Got bizz? hook me up!
-                </p>
+                <div className="space-y-2">
+                  <TextType
+                    text={typingText}
+                  />
+                </div>
                 <div className="flex flex-wrap gap-4">
-                  <button 
+                  <button
                     onClick={() => window.location.href = '/contact'}
                     className="px-6 py-3 bg-green-400 text-black hover:bg-green-500 transition-colors text-sm font-bold rounded"
                   >
                     $ ./send_message
                   </button>
-                  <button 
+                  <button
                     onClick={() => window.open('mailto:trongtrawork@gmail.com', '_blank')}
                     className="px-6 py-3 border border-gray-600/30 text-gray-300 hover:bg-gray-800/20 transition-colors text-sm rounded"
                   >
                     email --direct
                   </button>
-                  <button 
+                  <button
                     onClick={() => window.open('https://github.com/Trong-Tra', '_blank')}
                     className="px-6 py-3 border border-gray-600/30 text-gray-300 hover:bg-gray-800/20 transition-colors text-sm rounded"
                   >
