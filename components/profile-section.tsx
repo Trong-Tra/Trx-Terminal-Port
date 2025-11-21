@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Typewriter from './typewriter';
 import TextType from './text-type';
 import ScrambledText from './scrambled-text';
+import CountUp from './count-up';
 
 const typingText = [
   "got bizz?, hook me up!",
@@ -87,8 +88,8 @@ export default function ProfileSection() {
   }, [isVisible]);
 
   const stats = [
-    { number: '5', label: 'hackathons conquered' },
-    { number: '2', label: 'research publications' },
+    { number: 5, label: 'hackathons conquered' },
+    { number: 2, label: 'research publications' },
     { number: coffeeCount, label: 'coffee consumed', isGlitch: true },
   ];
 
@@ -174,8 +175,8 @@ export default function ProfileSection() {
               <div className="text-gray-300 leading-relaxed text-sm min-h-[100px]">
                 <Typewriter
                   text={aboutText}
-                  speed={20}
-                  cursor={true}
+                  speed={15}
+                  cursor={false}
                   start={isVisible}
                 />
               </div>
@@ -207,7 +208,7 @@ export default function ProfileSection() {
                         </>
                       ) : (
                         <span className={isGlitching && stat.isGlitch ? 'animate-bounce' : ''}>
-                          {stat.number}
+                          {stat.isGlitch ? stat.number : <CountUp to={stat.number as number} duration={2} separator="," />}
                         </span>
                       )}
                     </div>

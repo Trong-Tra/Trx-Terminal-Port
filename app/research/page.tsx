@@ -3,6 +3,7 @@
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import { Calendar, User } from 'lucide-react';
+import Typewriter from '@/components/typewriter';
 
 const research = [
   {
@@ -14,7 +15,7 @@ const research = [
       "Developed and implemented hybrid architecture combining state-backed credential issuance with privacy-preserving cross-chain verification.",
       "Built two main protocols: state-anchored credential issuance (PoA) and cross-chain selective disclosure using zk-SNARKs.",
       "Optimized identity proof sizes (<600 bytes) and fast end-to-end verification (<2 seconds).",
-      "Achieved on-chain cost reductions up to 75% vs. standard EVM deployments (minimum 244 Gwei per credential).",
+      "Achieved on-chain cost reductions up to 75% vs standard EVM deployments (minimum 244 Gwei per credential).",
       "Engineered robust security design against validator collusion, trusted setup leaks, contract vulnerabilities, and relayer attacks."
     ],
     technologies: [
@@ -28,7 +29,7 @@ const research = [
       "Parallel proof generation",
       "Cross-chain relayers"
     ],
-    publicationLink: '#',
+    publicationLink: 'https://ieeexplore.ieee.org/document/11231625',
   },
   {
     title: 'Proof-of-Merit: A Reputation-Weighted VRF-PoA Consensus and Governance for Educational Blockchains',
@@ -67,12 +68,18 @@ export default function ResearchPage() {
       <main className="container mx-auto px-4 py-20">
         <div className="space-y-12">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-              research.md
-            </h1>
-            <p className="text-green-400 text-lg">
-              // my contributions etched into the ledger of time
-            </p>
+            <Typewriter className="text-4xl md:text-5xl font-bold tracking-tight"
+              text="research.md"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
+            <Typewriter className="text-green-400 text-lg"
+              text="// my contributions etched into the ledger of time"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
           </div>
 
           <div className="space-y-8 max-w-4xl mx-auto">
@@ -142,7 +149,7 @@ export default function ResearchPage() {
           </div>
 
           <div className="text-center text-gray-500 space-y-2 py-8">
-            <p>// blockchain isn't just a tech, it is a realm and there are a lot more to discover</p>
+            <p>// blockchain isn't just a tech, its a realm and there are a lot more to discover</p>
           </div>
         </div>
       </main>

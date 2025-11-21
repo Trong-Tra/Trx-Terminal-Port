@@ -3,6 +3,10 @@
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import ProductCard from '@/components/product-card';
+import Typewriter from '@/components/typewriter';
+import CountUp from '@/components/count-up';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const products = [
   {
@@ -48,13 +52,15 @@ const products = [
 ];
 
 const stats = [
-  { label: 'Hackathon Wins', value: '5' },
-  { label: 'Prize Money', value: '$12,000+' },
-  { label: 'Years Active', value: '1+' },
-  { label: 'Sleepless Days', value: '25' },
+  { label: 'Hackathon Wins', value: 5, isNumber: true },
+  { label: 'Prize Money', value: 12000, isNumber: true, prefix: '$', suffix: '+' },
+  { label: 'Years Active', value: 1, isNumber: true, suffix: '+' },
+  { label: 'Sleepless Days', value: 26, isNumber: true },
 ];
 
 export default function ProductsPage() {
+  const [animationComplete, setAnimationComplete] = useState<{[key: number]: boolean}>({});
+
   return (
     <div className="min-h-screen bg-black text-white font-mono">
       <Navigation />
@@ -62,14 +68,19 @@ export default function ProductsPage() {
       <main className="container mx-auto px-4 py-20">
         <div className="space-y-12">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-              product.s.sol
-            </h1>
-            <p className="text-green-400 text-lg">
-              // products that I shipped
-            </p>
+            <Typewriter className="text-4xl md:text-5xl font-bold tracking-tight"
+              text="product.s.sol"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
+            <Typewriter className="text-green-400 text-lg"
+              text="// products that I shipped"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
           </div>
-
           {/* Stats Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {stats.map((stat, idx) => (
@@ -78,7 +89,24 @@ export default function ProductsPage() {
                 className="border border-gray-700 bg-black/50 p-4 text-center hover:border-green-400 transition-colors"
               >
                 <div className="text-2xl md:text-3xl font-bold text-green-400">
-                  {stat.value}
+                  {stat.isNumber ? (
+                    <>
+                      {stat.prefix || ''}
+                      <CountUp 
+                        to={stat.value as number} 
+                        duration={1.5} 
+                        separator="," 
+                        onEnd={() => {
+                          setTimeout(() => {
+                            setAnimationComplete(prev => ({ ...prev, [idx]: true }));
+                          }, 2600);
+                        }}
+                      />
+                      {stat.suffix && animationComplete[idx] ? stat.suffix : ''}
+                    </>
+                  ) : (
+                    stat.value
+                  )}
                 </div>
                 <div className="text-xs md:text-sm text-gray-400 mt-2">
                   {stat.label}
@@ -89,14 +117,24 @@ export default function ProductsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {products.map((product, idx) => (
-              <ProductCard
+              <motion.div
                 key={idx}
-                name={product.name}
-                description={product.description}
-                tags={product.tags}
-                award={product.award}
-                link={product.link}
-              />
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: idx * 0.1,
+                  ease: "easeOut"
+                }}
+              >
+                <ProductCard
+                  name={product.name}
+                  description={product.description}
+                  tags={product.tags}
+                  award={product.award}
+                  link={product.link}
+                />
+              </motion.div>
             ))}
           </div>
 

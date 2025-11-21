@@ -2,7 +2,8 @@
 
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-import { MapPin, Calendar } from 'lucide-react';
+import { MapPin, Calendar, Type } from 'lucide-react';
+import Typewriter from '@/components/typewriter';
 
 const experience = [
   {
@@ -42,12 +43,18 @@ export default function ExperiencePage() {
       <main className="container mx-auto px-4 py-20">
         <div className="space-y-12">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-              experience.log
-            </h1>
-            <p className="text-green-400 text-lg">
-              // where I've worked
-            </p>
+            <Typewriter className="text-4xl md:text-5xl font-bold tracking-tight"
+              text="experience.log"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
+            <Typewriter className="text-green-400 text-lg"
+              text="// where I've worked"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
           </div>
 
           <div className="space-y-8 max-w-4xl mx-auto">

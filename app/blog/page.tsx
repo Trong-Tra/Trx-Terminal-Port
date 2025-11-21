@@ -4,6 +4,7 @@ import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
 import Link from 'next/link';
 import { blogPosts } from './blog-data';
+import Typewriter from '@/components/typewriter';
 
 export default function BlogPage() {
   return (
@@ -13,14 +14,19 @@ export default function BlogPage() {
       <main className="container mx-auto px-4 py-20">
         <div className="space-y-12">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-              blog.md
-            </h1>
-            <p className="text-green-400 text-lg">
-              // listen to me yapping
-            </p>
+            <Typewriter className="text-4xl md:text-5xl font-bold tracking-tight"
+              text="blog.md"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
+            <Typewriter className="text-green-400 text-lg"
+              text="// listen to me yapping"
+              speed={50}
+              cursor={false}
+              start={true}
+            />
           </div>
-
           <div className="space-y-6 max-w-4xl mx-auto">
             {blogPosts.map((post, idx) => (
               <Link key={idx} href={`/blog/${post.id}`}>
