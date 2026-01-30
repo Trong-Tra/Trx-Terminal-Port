@@ -2,7 +2,7 @@
 
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
-import { MapPin, Calendar, Type } from 'lucide-react';
+import { MapPin, Calendar } from 'lucide-react';
 import Typewriter from '@/components/typewriter';
 
 const experience = [
@@ -61,33 +61,33 @@ export default function ExperiencePage() {
             {experience.map((exp, idx) => (
               <div
                 key={idx}
-                className="border border-gray-700 bg-black/50 p-8 space-y-4 hover:border-green-400 transition-colors"
+                className="border border-gray-700 bg-black/50 p-6 md:p-8 space-y-4 hover:border-green-400 transition-colors"
               >
-                <div className="flex justify-between items-start gap-4">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-white">
+                    <h3 className="text-lg md:text-xl font-bold text-white">
                       {exp.company}
                     </h3>
-                    <p className="text-green-400 font-semibold">
+                    <p className="text-green-400 font-semibold text-sm md:text-base">
                       {exp.title}
                     </p>
                   </div>
                   
-                  <div className="text-right space-y-2 shrink-0">
+                  <div className="text-left md:text-right space-y-2 shrink-0">
                     {exp.location && (
-                      <div className="flex items-center gap-2 text-gray-400 text-sm">
-                        <MapPin className="w-4 h-4" />
+                      <div className="flex items-center gap-2 text-gray-400 text-sm md:justify-end">
+                        <MapPin className="w-4 h-4 shrink-0" />
                         <span>{exp.location}</span>
                       </div>
                     )}
-                    <div className="flex items-center gap-2 text-gray-400 text-sm">
-                      <Calendar className="w-4 h-4" />
+                    <div className="flex items-center gap-2 text-gray-400 text-sm md:justify-end">
+                      <Calendar className="w-4 h-4 shrink-0" />
                       <span>{exp.date}</span>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
                   {exp.description}
                 </p>
 

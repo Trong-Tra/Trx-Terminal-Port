@@ -12,9 +12,9 @@ const products = [
   {
     name: 'Hakifi',
     description:
-      'Production-grade DeFi platform that I shipped during my time at Nami Foundation, featuring my VWAP-hugged TWAP formula innovation. Optimized execution engine that hugs market price while minimizing slippage and MEV exposure.',
+      'Production-grade DeFi platform at Nami Foundation featuring my VWAP-hugged TWAP formula innovation. Optimized execution engine that hugs market price while minimizing slippage and MEV exposure.',
     tags: ['DeFi', 'TWAP', 'MEV', 'Production'],
-    award: 'Shipped at Nami Foundation',
+    award: 'Shipped at Nami Foundation - Real product in production',
     link: 'https://hakifi.xyz/',
   },
   {
@@ -36,7 +36,7 @@ const products = [
   {
     name: 'Terrum',
     description:
-      'Vietnam’s first real estate tokenization platform purpose-built on U2U Network, enabling anyone to invest, earn rental yield, and trade fractional property ownership instantly through digital assets.',
+      "Vietnam's first real estate tokenization platform purpose-built on U2U Network, enabling anyone to invest, earn rental yield, and trade fractional property ownership instantly through digital assets.",
     tags: ['RWA', 'DeFi', 'NFT'],
     award: 'Nominated, Honorable Mention, Branding Partnered by U2U Network',
     link: 'https://github.com/Hirosolo/Terrum',
@@ -54,35 +54,35 @@ const products = [
     description:
       'Project hub that growth web3 startups need, from idea to launch and beyond.',
     tags: ['LST', 'XCM', 'Parachain'],
-    award: 'Back-to-Back Polkadot Hackathon DeFi Champion (’24 & ’25)',
+    award: "Back-to-Back Polkadot Hackathon DeFi Champion ('24 & '25)",
     link: 'https://github.com/Solidithi/Defrost-Contracts',
   },
 ];
 
 const stats = [
   { label: 'Hackathon Wins', value: 5, isNumber: true },
-  { label: 'Prize Money', value: 13000, isNumber: true, prefix: '$', suffix: '+' },
+  { label: 'Prize Money', value: 12000, isNumber: true, prefix: '$', suffix: '+' },
   { label: 'Years Active', value: 1, isNumber: true, suffix: '+' },
-  { label: 'Sleepless Days', value: 30, isNumber: true },
+  { label: 'Sleepless Days', value: 26, isNumber: true },
 ];
 
 export default function ProductsPage() {
-  const [animationComplete, setAnimationComplete] = useState<{ [key: number]: boolean }>({});
+  const [animationComplete, setAnimationComplete] = useState<{[key: number]: boolean}>({});
 
   return (
     <div className="min-h-screen bg-black text-white font-mono">
       <Navigation />
 
-      <main className="container mx-auto px-4 py-20">
-        <div className="space-y-12">
+      <main className="container mx-auto px-4 py-12 md:py-20">
+        <div className="space-y-8 md:space-y-12">
           <div className="text-center space-y-4">
-            <Typewriter className="text-4xl md:text-5xl font-bold tracking-tight"
+            <Typewriter className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
               text="product.s.sol"
               speed={50}
               cursor={false}
               start={true}
             />
-            <Typewriter className="text-green-400 text-lg"
+            <Typewriter className="text-green-400 text-base sm:text-lg"
               text="// products that I shipped"
               speed={50}
               cursor={false}
@@ -90,20 +90,20 @@ export default function ProductsPage() {
             />
           </div>
           {/* Stats Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto">
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="border border-gray-700 bg-black/50 p-4 text-center hover:border-green-400 transition-colors"
+                className="border border-gray-700 bg-black/50 p-3 md:p-4 text-center hover:border-green-400 transition-colors min-w-0"
               >
-                <div className="text-2xl md:text-3xl font-bold text-green-400">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-green-400">
                   {stat.isNumber ? (
                     <>
                       {stat.prefix || ''}
-                      <CountUp
-                        to={stat.value as number}
-                        duration={1.5}
-                        separator=","
+                      <CountUp 
+                        to={stat.value as number} 
+                        duration={1.5} 
+                        separator="," 
                         onEnd={() => {
                           setTimeout(() => {
                             setAnimationComplete(prev => ({ ...prev, [idx]: true }));
@@ -116,22 +116,22 @@ export default function ProductsPage() {
                     stat.value
                   )}
                 </div>
-                <div className="text-xs md:text-sm text-gray-400 mt-2">
+                <div className="text-xs md:text-sm text-gray-400 mt-1 md:mt-2">
                   {stat.label}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 auto-rows-fr">
             {products.map((product, idx) => (
               <motion.div
                 key={idx}
                 className="h-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
+                transition={{ 
+                  duration: 0.5, 
                   delay: idx * 0.1,
                   ease: "easeOut"
                 }}
@@ -147,9 +147,9 @@ export default function ProductsPage() {
             ))}
           </div>
 
-          <div className="text-center text-gray-500 space-y-2 py-8">
-            <p>// building the next impactful product...</p>
-            <p className="text-xs">console.log("shipping in progress")</p>
+          <div className="text-center text-gray-500 space-y-2 py-6 md:py-8">
+            <p className="text-sm md:text-base">// building the next impactful product...</p>
+            <p className="text-xs">console.log(&quot;shipping in progress&quot;)</p>
           </div>
         </div>
       </main>

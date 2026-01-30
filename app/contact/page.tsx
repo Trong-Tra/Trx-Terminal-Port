@@ -33,18 +33,18 @@ export default function ContactPage() {
     <div className="min-h-screen bg-black text-white font-mono">
       <Navigation />
 
-      <main className="container mx-auto px-4 py-20">
-        <div className="space-y-12">
+      <main className="container mx-auto px-4 py-12 md:py-20">
+        <div className="space-y-8 md:space-y-12">
           <div className="text-center space-y-4">
             <Typewriter
-              className="text-4xl md:text-5xl font-bold tracking-tight"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
               text="contact.json"
               speed={50}
               cursor={false}
               start={true}
             />
             <Typewriter
-              className="text-green-400 text-lg"
+              className="text-green-400 text-base md:text-lg px-2"
               text="// chasing glory and making breads together"
               speed={50}
               cursor={false}
@@ -53,14 +53,14 @@ export default function ContactPage() {
           </div>
 
           {/* Social Media Buttons */}
-          <div className="flex justify-center gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:flex md:flex-row justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
             {socialLinks.map((social, idx) => (
               <a
                 key={idx}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center flex-1 py-4 border border-gray-700 bg-black/50 transition-all hover:border-green-400 group"
+                className="flex items-center justify-center py-4 px-4 border border-gray-700 bg-black/50 transition-all hover:border-green-400 group md:flex-1"
                 title={social.name}
               >
                 <social.icon className="w-6 h-6 text-gray-400 group-hover:text-green-400 transition-colors" />
@@ -69,16 +69,16 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Text Block */}
-          <div className="border border-gray-700 bg-black/50 p-8 md:p-12 max-w-4xl mx-auto">
+          <div className="border border-gray-700 bg-black/50 p-6 md:p-8 lg:p-12 max-w-4xl mx-auto">
             <Typewriter
-              className="text-2xl font-bold mb-6 text-green-400"
+              className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-green-400"
               text="// reach_out.md"
               speed={50}
               cursor={false}
               start={true}
             />
 
-            <div className="space-y-4 text-gray-300 leading-relaxed">
+            <div className="space-y-4 text-gray-300 leading-relaxed text-sm md:text-base">
               <div className="space-y-4 text-gray-300 leading-relaxed">
                  <p>
                     I'm down to help if you're building something and need <span className="text-green-400 font-semibold">an extra hand</span>.
@@ -116,19 +116,19 @@ export default function ContactPage() {
             </div>
 
             {/* Calendly Button */}
-            <div className="flex justify-end mt-8">
+            <div className="flex justify-end mt-6 md:mt-8">
               <a
                 href="https://calendly.com/trongtrawork/tron-lounge"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-green-400 text-black hover:bg-green-500 transition-colors font-bold"
+                className="px-4 py-2 md:px-6 md:py-3 bg-green-400 text-black hover:bg-green-500 transition-colors font-bold text-sm md:text-base"
               >
                 $ book_meeting
               </a>
             </div>
           </div>
 
-          <div className="text-center text-gray-500 space-y-2 py-8">
+          <div className="text-center text-gray-500 space-y-2 py-6 md:py-8 px-4">
             <p>// let's turn coffee into code together</p>
             <p className="text-xs">
               if (message.isInteresting()) {'{'}response.send_immediately(); {'}'}

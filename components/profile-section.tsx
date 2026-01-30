@@ -103,12 +103,12 @@ export default function ProfileSection() {
     '> coffee.exe running',
     '> ▓▒░d̸̙͝͠a̵̯͂̚ṯ̴̃͋a̵͇̅ ̷̲̈́b̷̢̋l̷͚͐e̷͖͊ê̸̖d̶̫͌░▒▓',
     '> waiting for block confirmation',
-    '> ∞̵͈̿r̸̪͒é̸̥s̷̨̏o̵̜͒n̴̖̚a̵̬͘ṇ̶̋c̷̛̪e̴̖͑ ̷̦̿ò̶̢v̷̥̾ẻ̶̢r̷͉̓f̵̬̀l̶̫̓o̴̢̔w̵̟͗∞',
+    '> ∞̵͈̿r̸̪͒é̸̥s̷̨̏o̵̜͒n̴̖̚a̵̬͘ṇ̶̋c̷̛̪e̴͑ ̷̦̿ò̶̢v̷̥̾ẻ̶̢r̷͉̓f̵̬̀l̶̫̓o̴̢̔w̵̟͗∞',
     '> ░̨͖͊̀͒͠ͅ░̡̯̽͋̈̕ ș̷̋y̴͈̽n̴̥͝ᴄ̴͖̀ ̸͓̆è̶͜г̴̎ͅг̵̞̾o̶̟͗г̶̢͂ ∗'
   ];
 
 
-  const aboutText = `I'm a web3 builder and a blockchain researcher, I work on various things within the blockchain space. I believe in decentralized and transparency. My expertise lies in DeFi, and while we’re not there yet, I believe a world free from centralized control where people are no longer pawns of big corporations -yes, I'm a huge fan of cyberpunk aesthetics. If you fw what I stand for, hit me up. Let do some bizz choom!`;
+  const aboutText = `I'm a web3 builder and a blockchain researcher, I work on various things within the blockchain space. I believe in decentralized and transparency. My expertise lies in DeFi, and while we're not there yet, I believe a world free from centralized control where people are no longer pawns of big corporations -yes, I'm a huge fan of cyberpunk aesthetics. If you fw what I stand for, hit me up. Let do some bizz choom!`;
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact-section');
@@ -125,7 +125,7 @@ export default function ProfileSection() {
           <div className="lg:col-span-3 flex flex-col">
             <div className="space-y-6 flex-1 flex flex-col">
               {/* Profile Picture */}
-              <div className="aspect-square bg-transparent border border-gray-600/30 rounded-lg overflow-hidden">
+              <div className="aspect-square max-w-[200px] lg:max-w-none mx-auto lg:mx-0 w-full bg-transparent border border-gray-600/30 rounded-lg overflow-hidden">
                 <img
                   src="/nft.jpg"
                   alt="Profile NFT"
@@ -156,7 +156,7 @@ export default function ProfileSection() {
                       radius={150}
                       duration={0.4}
                       scrambleChars="!<>-_\\/[]{}—=+*^?#________"
-                      className="font-mono whitespace-nowrap overflow-hidden text-ellipsis"
+                      className="font-mono break-all"
                     >
                       {line}
                     </ScrambledText>
@@ -170,7 +170,7 @@ export default function ProfileSection() {
           <div className="lg:col-span-9 space-y-8 flex flex-col">
 
             {/* About Block */}
-            <div className="bg-transparent border border-gray-600/30 p-6 rounded-lg flex-1">
+            <div className="bg-transparent border border-gray-600/30 p-4 sm:p-6 rounded-lg flex-1">
               <h2 className="text-green-400 font-bold mb-4 text-lg">// about.md</h2>
               <div className="text-gray-300 leading-relaxed text-sm min-h-[100px]">
                 <Typewriter
@@ -183,9 +183,9 @@ export default function ProfileSection() {
             </div>
 
             {/* Stats Block */}
-            <div className="bg-transparent border border-gray-600/30 p-6 rounded-lg relative">
+            <div className="bg-transparent border border-gray-600/30 p-4 sm:p-6 rounded-lg relative">
               <h3 className="text-green-400 font-bold mb-4 text-lg">// stats.json</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 {stats.map((stat, idx) => (
                   <div key={idx} className="text-center space-y-2">
                     <div className={`text-2xl font-bold font-mono relative ${stat.isGlitch ? `
@@ -221,7 +221,7 @@ export default function ProfileSection() {
             </div>
 
             {/* Contact Block */}
-            <div id="contact-section" className="bg-transparent border border-gray-600/30 p-6 rounded-lg">
+            <div id="contact-section" className="bg-transparent border border-gray-600/30 p-4 sm:p-6 rounded-lg">
               <h3 className="text-green-400 font-bold mb-4 text-lg">// contact.sh</h3>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -229,22 +229,22 @@ export default function ProfileSection() {
                     text={typingText}
                   />
                 </div>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-3 sm:gap-4">
                   <button
                     onClick={() => window.location.href = '/contact'}
-                    className="px-6 py-3 bg-green-400 text-black hover:bg-green-500 transition-colors text-sm font-bold rounded"
+                    className="px-4 sm:px-6 py-3 bg-green-400 text-black hover:bg-green-500 transition-colors text-sm font-bold rounded"
                   >
                     $ ./send_message
                   </button>
                   <button
                     onClick={() => window.open('mailto:trongtrawork@gmail.com', '_blank')}
-                    className="px-6 py-3 border border-gray-600/30 text-gray-300 hover:bg-gray-800/20 transition-colors text-sm rounded"
+                    className="px-4 sm:px-6 py-3 border border-gray-600/30 text-gray-300 hover:bg-gray-800/20 transition-colors text-sm rounded"
                   >
                     email --direct
                   </button>
                   <button
                     onClick={() => window.open('https://github.com/Trong-Tra', '_blank')}
-                    className="px-6 py-3 border border-gray-600/30 text-gray-300 hover:bg-gray-800/20 transition-colors text-sm rounded"
+                    className="px-4 sm:px-6 py-3 border border-gray-600/30 text-gray-300 hover:bg-gray-800/20 transition-colors text-sm rounded"
                   >
                     github --profile
                   </button>

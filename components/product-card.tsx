@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Github, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 interface ProductCardProps {
   name: string;
@@ -17,14 +17,14 @@ export default function ProductCard({
   award,
 }: ProductCardProps) {
   return (
-    <div className="border border-gray-700 bg-black/50 p-6 space-y-4 hover:border-green-400 transition-colors group h-full flex flex-col">
-      <div className="flex justify-between items-start">
-        <div className="space-y-1">
+    <div className="border border-gray-700 bg-black/50 p-4 sm:p-6 space-y-4 hover:border-green-400 transition-colors group h-full flex flex-col">
+      <div className="flex justify-between items-start gap-3">
+        <div className="space-y-1 min-w-0">
           <h3 className="text-lg font-bold group-hover:text-green-400 transition-colors">
             {name}
           </h3>
           {award && (
-            <span className="inline-block px-2 py-1 text-xs bg-yellow-900/30 border border-yellow-600 text-yellow-400">
+            <span className="inline-block px-2 py-1 text-xs bg-yellow-900/30 border border-yellow-600 text-yellow-400 whitespace-nowrap">
               🏆 {award}
             </span>
           )}
