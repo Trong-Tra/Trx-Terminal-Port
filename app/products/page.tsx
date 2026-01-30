@@ -61,9 +61,9 @@ const products = [
 
 const stats = [
   { label: 'Hackathon Wins', value: 5, isNumber: true },
-  { label: 'Prize Money', value: 12000, isNumber: true, prefix: '$', suffix: '+' },
+  { label: 'Prize Money', value: 13000, isNumber: true, prefix: '$', suffix: '+' },
   { label: 'Years Active', value: 1, isNumber: true, suffix: '+' },
-  { label: 'Sleepless Days', value: 26, isNumber: true },
+  { label: 'Sleepless Days', value: 30, isNumber: true },
 ];
 
 export default function ProductsPage() {
