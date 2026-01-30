@@ -17,7 +17,7 @@ export default function Hero() {
           </h1>
           <div className="text-gray-400 text-2xl mt-4 h-8">
             <Typewriter
-              text={["// web3 builder, blockchain researcher, hacker, bounty hunter"]}
+              text={["// web3 jack of all trades, builder, architect, researcher, hacker, bounty hunter"]}
               speed={40}
               initialDelay={550}
               cursor={false}

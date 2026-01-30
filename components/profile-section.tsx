@@ -108,7 +108,7 @@ export default function ProfileSection() {
   ];
 
 
-  const aboutText = `I'm a web3 builder and a blockchain researcher, I believe in decentralized and transparency. My expertise lies in DeFi, and while we’re not there yet, I believe a world free from centralized control where people are no longer pawns of big corporations -yes, I'm a huge fan of cyberpunk aesthetics. If you fw what I stand for, hit me up. Let do some bizz choom!`;
+  const aboutText = `I'm a web3 builder and a blockchain researcher, I work on various things within the blockchain space. I believe in decentralized and transparency. My expertise lies in DeFi, and while we’re not there yet, I believe a world free from centralized control where people are no longer pawns of big corporations -yes, I'm a huge fan of cyberpunk aesthetics. If you fw what I stand for, hit me up. Let do some bizz choom!`;
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact-section');
