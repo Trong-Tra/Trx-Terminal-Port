@@ -10,6 +10,14 @@ import { motion } from 'framer-motion';
 
 const products = [
   {
+    name: 'Hakifi',
+    description:
+      'Production-grade DeFi platform that I shipped during my time at Nami Foundation, featuring my VWAP-hugged TWAP formula innovation. Optimized execution engine that hugs market price while minimizing slippage and MEV exposure.',
+    tags: ['DeFi', 'TWAP', 'MEV', 'Production'],
+    award: 'Shipped at Nami Foundation',
+    link: 'https://hakifi.xyz/',
+  },
+  {
     name: 'TradeClub',
     description:
       'Social trading on steroids, compete, copy, and liquidate or get liquidated. The degen engine for EVM blockchains.',
@@ -59,7 +67,7 @@ const stats = [
 ];
 
 export default function ProductsPage() {
-  const [animationComplete, setAnimationComplete] = useState<{[key: number]: boolean}>({});
+  const [animationComplete, setAnimationComplete] = useState<{ [key: number]: boolean }>({});
 
   return (
     <div className="min-h-screen bg-black text-white font-mono">
@@ -92,10 +100,10 @@ export default function ProductsPage() {
                   {stat.isNumber ? (
                     <>
                       {stat.prefix || ''}
-                      <CountUp 
-                        to={stat.value as number} 
-                        duration={1.5} 
-                        separator="," 
+                      <CountUp
+                        to={stat.value as number}
+                        duration={1.5}
+                        separator=","
                         onEnd={() => {
                           setTimeout(() => {
                             setAnimationComplete(prev => ({ ...prev, [idx]: true }));
@@ -121,8 +129,8 @@ export default function ProductsPage() {
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.5, 
+                transition={{
+                  duration: 0.5,
                   delay: idx * 0.1,
                   ease: "easeOut"
                 }}

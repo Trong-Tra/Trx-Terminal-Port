@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Github, Globe } from 'lucide-react';
 
 interface ProductCardProps {
   name: string;
@@ -28,7 +29,7 @@ export default function ProductCard({
             </span>
           )}
         </div>
-        {link ? (
+        {link && (
           <a
             href={link}
             target="_blank"
@@ -36,22 +37,18 @@ export default function ProductCard({
             className="shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
-            <Image
-              src="/github-mark.svg"
-              alt="GitHub"
-              width={20}
-              height={20}
-              className="opacity-50 hover:opacity-100 transition-opacity cursor-pointer invert"
-            />
+            {link.includes('github.com') ? (
+              <Image
+                src="/github-mark.svg"
+                alt="GitHub"
+                width={20}
+                height={20}
+                className="opacity-50 hover:opacity-100 transition-opacity cursor-pointer invert"
+              />
+            ) : (
+              <Globe className="w-5 h-5 opacity-50 hover:opacity-100 transition-opacity text-white" />
+            )}
           </a>
-        ) : (
-          <Image
-            src="/github-mark.svg"
-            alt="GitHub"
-            width={20}
-            height={20}
-            className="opacity-50 group-hover:opacity-100 transition-opacity invert"
-          />
         )}
       </div>
 
