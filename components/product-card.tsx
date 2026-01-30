@@ -17,7 +17,7 @@ export default function ProductCard({
   award,
 }: ProductCardProps) {
   return (
-    <div className="border border-gray-700 bg-black/50 p-6 space-y-4 hover:border-green-400 transition-colors group">
+    <div className="border border-gray-700 bg-black/50 p-6 space-y-4 hover:border-green-400 transition-colors group h-full flex flex-col">
       <div className="flex justify-between items-start">
         <div className="space-y-1">
           <h3 className="text-lg font-bold group-hover:text-green-400 transition-colors">
@@ -52,7 +52,7 @@ export default function ProductCard({
         )}
       </div>
 
-      <p className="text-sm text-gray-300 leading-relaxed">{description}</p>
+      <p className="text-sm text-gray-300 leading-relaxed flex-grow">{description}</p>
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, tagIdx) => (
