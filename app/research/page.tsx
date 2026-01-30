@@ -2,65 +2,26 @@
 
 import Navigation from '@/components/navigation';
 import Footer from '@/components/footer';
+import ResearchModal from '@/components/research-modal';
+import { research } from './research-data';
 import { Calendar, User } from 'lucide-react';
 import Typewriter from '@/components/typewriter';
-
-const research = [
-  {
-    title: 'Lotus: a Hybrid Cross-Chain Framework for Privacy-Preserving Digital Identity',
-    date: 'Oct 2025',
-    role: 'Co-Author & Presenter',
-    description: `A framework harmonizing sovereign digital credential issuance with cross-chain privacy-preserving verification. Lotus uses a permissioned PoA blockchain for authoritative, state-backed identity credentials and deploys zero-knowledge proof (zk-SNARK) bridges for selective, private, cross-chain verification. Designed for national-scale applications, Lotus enables both legally compliant and privacy-respecting digital identities usable across multiple blockchain ecosystems.`,
-    achievements: [
-      "Developed and implemented hybrid architecture combining state-backed credential issuance with privacy-preserving cross-chain verification.",
-      "Built two main protocols: state-anchored credential issuance (PoA) and cross-chain selective disclosure using zk-SNARKs.",
-      "Optimized identity proof sizes (<600 bytes) and fast end-to-end verification (<2 seconds).",
-      "Achieved on-chain cost reductions up to 75% vs standard EVM deployments (minimum 244 Gwei per credential).",
-      "Engineered robust security design against validator collusion, trusted setup leaks, contract vulnerabilities, and relayer attacks."
-    ],
-    technologies: [
-      "Permissioned Proof-of-Authority (PoA) blockchain",
-      "zk-SNARKs (Groth16)",
-      "EVM-compatible smart contracts",
-      "Decentralized Identifiers (DID)",
-      "Verifiable Credentials (VC)",
-      "Merkle trees",
-      "Selective disclosure protocols",
-      "Parallel proof generation",
-      "Cross-chain relayers"
-    ],
-    publicationLink: 'https://ieeexplore.ieee.org/document/11231625',
-  },
-  {
-    title: 'Proof-of-Merit: A Reputation-Weighted VRF-PoA Consensus and Governance for Educational Blockchains',
-    date: 'Dec 2025',
-    role: 'Co-Author & Presenter',
-    description: `A novel consensus and governance framework that integrates Proof-of-Authority with Verifiable Random Functions (VRFs) and a dual-token merit model. Proof-of-Merit (PoM) introduces non-transferable, academically earned reputation as a core component of validator selection and governance weighting, enabling Sybil-resistant, pedagogically aligned blockchain infrastructure for Learn-to-Earn ecosystems. Implemented on Hyperledger Besu and benchmarked with Hyperledger Caliper, PoM strengthens fairness, reduces centralization risks, and maintains competitive performance while embedding educational merit directly into consensus dynamics.`,
-  achievements: [
-    "Designed and formalized a hybrid VRF-PoA consensus protocol weighted by both economic stake and non-transferable academic reputation.",
-    "Engineered a dual-token governance model that anchors voting power in verifiable merit, mitigating plutocracy and Sybil attacks.",
-    "Implemented PoM on Hyperledger Besu and conducted end-to-end benchmarking using Hyperledger Caliper.",
-    "Achieved significant fairness improvements, reducing block-production Gini coefficient to 0.1932 and raising Nakamoto coefficient to 8.",
-    "Introduced reputation decay and cooldown mechanisms to prevent long-term validator dominance and merit saturation.",
-    "Defined a VRF randomness pipeline using finalized block data to eliminate last-mover influence and entropy grinding attacks.",
-    "Conducted sensitivity analysis demonstrating optimal fairness at wr = 0.4 within the stake–reputation weighting model."
-  ],
-  technologies: [
-    "Verifiable Random Functions (VRF)",
-    "Proof-of-Authority (PoA) consensus",
-    "Dual-token tokenomics",
-    "Hyperledger Besu",
-    "Hyperledger Caliper benchmarking",
-    "Self-Sovereign Identity (SSI)",
-    "Reputation-weighted governance",
-    "BFT finality",
-    "Merit decay & fairness optimization"
-  ],
-  publicationLink: '#',
-  }
-];
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 export default function ResearchPage() {
+  const [selectedPaper, setSelectedPaper] = useState<number | null>(null);
+  const [showInPressNotice, setShowInPressNotice] = useState(false);
+
+  const handlePublicationClick = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
+    if (link === '#' || !link) {
+      e.preventDefault();
+      e.stopPropagation();
+      setShowInPressNotice(true);
+      setTimeout(() => setShowInPressNotice(false), 3000);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white font-mono">
       <Navigation />
@@ -82,71 +43,81 @@ export default function ResearchPage() {
             />
           </div>
 
-          <div className="space-y-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {research.map((paper, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="border border-gray-700 bg-black/50 p-8 space-y-6 hover:border-green-400 transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: idx * 0.1,
+                  ease: "easeOut"
+                }}
+                onClick={() => setSelectedPaper(idx)}
+                className="border border-gray-700 bg-black/50 p-6 space-y-4 hover:border-green-400 transition-all cursor-pointer group"
               >
-                <div className="space-y-2">
-                  <h2 className="text-2xl font-bold text-white">
+                <div className="space-y-3">
+                  <h2 className="text-lg font-bold text-white group-hover:text-green-400 transition-colors line-clamp-2">
                     {paper.title}
                   </h2>
-                  <div className="flex items-center gap-6 text-sm text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
+                  <div className="flex items-center gap-4 text-xs text-gray-400">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
                       <span>{paper.date}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <User className="w-4 h-4" />
+                    <div className="flex items-center gap-1">
+                      <User className="w-3 h-3" />
                       <span>{paper.role}</span>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
                   {paper.description}
                 </p>
 
-                <div className="space-y-3">
-                  <p className="font-semibold text-white">Key Achievements:</p>
-                  <ul className="space-y-2">
-                    {paper.achievements.map((achievement, achIdx) => (
-                      <li
-                        key={achIdx}
-                        className="text-gray-300 flex items-center gap-2"
-                      >
-                        <span className="text-green-400">→</span>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
+                <div className="flex flex-wrap gap-2">
+                  {paper.technologies.slice(0, 4).map((tech, techIdx) => (
+                    <span
+                      key={techIdx}
+                      className="px-2 py-1 text-xs border border-gray-600 text-gray-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {paper.technologies.length > 4 && (
+                    <span className="px-2 py-1 text-xs text-gray-500">
+                      +{paper.technologies.length - 4} more
+                    </span>
+                  )}
                 </div>
 
-                <div className="space-y-3">
-                  <p className="font-semibold text-white">Technologies Used:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {paper.technologies.map((tech, techIdx) => (
-                      <span
-                        key={techIdx}
-                        className="px-3 py-1 text-xs border border-gray-600 text-gray-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                <div className="pt-2">
+                  <a
+                    href={paper.publicationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePublicationClick(e, paper.publicationLink);
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-3 bg-green-400 text-black hover:bg-green-500 transition-colors font-bold"
+                  >
+                    <span>↗</span>
+                    Read Full Publication
+                  </a>
                 </div>
-
-                <a
-                  href={paper.publicationLink}
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-gray-600 hover:border-green-400 text-gray-300 hover:text-green-400 transition-colors mt-4"
-                >
-                  <span>↗</span>
-                  Read Publication
-                </a>
-              </div>
+              </motion.div>
             ))}
           </div>
+
+          {/* Research Modal */}
+          <ResearchModal
+            isOpen={selectedPaper !== null}
+            onClose={() => setSelectedPaper(null)}
+            paper={selectedPaper !== null ? research[selectedPaper] : research[0]}
+          />
 
           <div className="text-center text-gray-500 space-y-2 py-8">
             <p>// blockchain isn't just a tech, its a realm and there are a lot more to discover</p>
@@ -155,6 +126,45 @@ export default function ResearchPage() {
       </main>
 
       <Footer />
+
+      {/* In Press Notice Modal */}
+      <AnimatePresence>
+        {showInPressNotice && (
+          <>
+            {/* Darker overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 z-80"
+              onClick={() => setShowInPressNotice(false)}
+            />
+            
+            {/* Notice box */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-90 bg-black border-2 border-green-400 p-8 max-w-sm"
+            >
+              <div className="text-center space-y-4">
+                <p className="text-green-400 text-xl font-bold">📄</p>
+                <p className="text-white font-semibold">Publication In Press</p>
+                <p className="text-gray-400 text-sm">
+                  This publication is currently under review and will be available soon.
+                </p>
+                <button
+                  onClick={() => setShowInPressNotice(false)}
+                  className="mt-4 px-6 py-2 bg-green-400 text-black hover:bg-green-500 transition-colors font-bold"
+                >
+                  Got it
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
