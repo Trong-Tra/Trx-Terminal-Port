@@ -24,7 +24,7 @@ export default function ProductCard({
             {name}
           </h3>
           {award && (
-            <span className="inline-block px-2 py-1 text-xs bg-yellow-900/30 border border-yellow-600 text-yellow-400 whitespace-nowrap">
+            <span className="inline-block px-2 py-1 text-[10px] sm:text-xs bg-yellow-900/30 border border-yellow-600 text-yellow-400">
               🏆 {award}
             </span>
           )}
